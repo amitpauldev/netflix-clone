@@ -41,15 +41,13 @@ const Home = () => {
 			</div>
 
 			<div className="pl-[6%]">
-				<TitleCards title={"Only on Netflix"} />
-				<TitleCards title={"Blockbuster Movies"} />
-				<TitleCards title={"Upcoming Releases"} />
-				<TitleCards title={"Top Picks for You"} />
+				<TitleCards title={"Blockbuster Movies"} category={"top_rated"} />
+				<TitleCards title={"Only on Netflix"} category={"popular"} />
+				<TitleCards title={"Upcoming Releases"} category={"upcoming"} />
+				<TitleCards title={"Top Picks for You"} category={"now_playing"} />
 			</div>
 
-			<div>
-				<Footer />
-			</div>
+			<Footer />
 		</div>
 	);
 };

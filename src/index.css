@@ -28,4 +28,8 @@
 	.scrollbar-hide::-webkit-scrollbar {
 		display: none;
 	}
+	.bg-banner {
+		/* background-image: url("./assets/background_banner.jpg") */
+		@apply w-full h-screen bg-[url('./assets/background_banner.jpg')] bg-cover bg-center;
+	}
 }
