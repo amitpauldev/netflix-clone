@@ -1,11 +1,14 @@
-import hero_banner from "../../assets/hero_banner(5).jpg";
+import hero_banner from "../../assets/hero_banner(1).jpg";
 import hero_title from "../../assets/hero_title.png";
 import play_icon from "../../assets/play_icon.png";
 import info_icon from "../../assets/info_icon.png";
 
 import TitleCards from "../TitleCards/TitleCards";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div className="relative w-full h-screen">
 			<img
@@ -21,13 +24,23 @@ const Hero = () => {
 					versatility, in both roles, Hakan and Harun.
 				</p>
 				<div className="flex gap-4">
-					<button className="flex items-center gap-2 text-xs md:text-sm bg-white text-black px-3 py-1.5 rounded cursor-pointer">
+					<button
+						onClick={() => navigate("/player/0")}
+						className="flex items-center gap-2 text-xs md:text-sm bg-white text-black px-3 py-1.5 rounded cursor-pointer"
+					>
 						<img src={play_icon} alt="Play" className="w-3.5 md:w-5" />
 						Play
 					</button>
 					<button className="flex items-center gap-2 text-xs md:text-sm bg-white/30 text-white px-3 py-1.5 rounded cursor-pointer">
-						<img src={info_icon} alt="Info" className="w-3.5 md:w-5" />
-						More Info
+						<a
+							href="https://en.wikipedia.org/wiki/The_Protector_(Turkish_TV_series)"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="flex items-center gap-2"
+						>
+							<img src={info_icon} alt="Info" className="w-3.5 md:w-5" />
+							More Info
+						</a>
 					</button>
 				</div>
 

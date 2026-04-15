@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo.png";
-import search_icon from "../../assets/search_icon.svg";
 import bell_icon from "../../assets/bell_icon.svg";
 import profile_img from "../../assets/profile_img.png";
 import caret_icon from "../../assets/caret_icon.svg";
 import { useAuth } from "../../contexts/AuthContext";
 import { logOut } from "../../firebase";
 import { useNavigate } from "react-router";
+import Search from "../Search/Search";
 
 const Navbar = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 
-	const [showSearch, setShowSearch] = useState(false);
-	const [searchQuery, setSearchQuery] = useState("");
-
 	const [showProfile, setShowProfile] = useState(false);
+	const [showSearch, setShowSearch] = useState(false);
 
 	const menuRef = useRef();
 	const searchRef = useRef();
@@ -61,47 +59,62 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className={`fixed w-full z-50 px-[6%] py-4 flex items-center justify-between transition-all duration-300 ${
+			className={`fixed top-0 w-full z-50 px-[6%] py-4 flex items-center justify-between transition-all duration-300 ${
 				scrolled ? "bg-black" : "bg-gradient-to-b from-black/80 to-transparent"
 			} ${menuOpen ? "bg-black transition-none duration-initial" : ""}`}
 		>
 			{/* LEFT */}
 			<div className="flex items-center gap-6">
-				<img className="w-24 cursor-pointer" src={logo} alt="logo" />
+				<img
+					onClick={() => navigate("/home")}
+					className="w-24 cursor-pointer"
+					src={logo}
+					alt="logo"
+				/>
 
 				{/* Desktop Menu */}
 				<ul className="hidden md:flex gap-5 text-sm">
-					<li className="cursor-pointer hover:text-gray-300">Home</li>
-					<li className="cursor-pointer hover:text-gray-300">TV Shows</li>
-					<li className="cursor-pointer hover:text-gray-300">Movies</li>
-					<li className="cursor-pointer hover:text-gray-300">New & Popular</li>
-					<li className="cursor-pointer hover:text-gray-300">My List</li>
+					<li
+						onClick={() => navigate("/home")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						Home
+					</li>
+					<li
+						onClick={() => navigate("/movies")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						Movies
+					</li>
+					<li
+						onClick={() => navigate("/new&popular")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						New & Popular
+					</li>
+					<li
+						onClick={() => navigate("/tv-shows")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						TV Shows
+					</li>
+					<li
+						onClick={() => navigate("/mylist")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						My List
+					</li>
 				</ul>
 			</div>
 
 			{/* RIGHT */}
 			<div className="flex items-center gap-4">
 				{/* Search */}
-				<div ref={searchRef} className="flex items-center relative">
-					<input
-						type="text"
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder="Search..."
-						className={`bg-black border border-gray-600 text-sm pl-3 pr-8 py-2 rounded-xl outline-none transition-all duration-300 ${
-							showSearch ? "w-40 opacity-100 ml-2" : "w-0 opacity-0"
-						}`}
-					/>
-					<img
-						onClick={(e) => {
-							e.stopPropagation();
-							setShowSearch((prev) => !prev);
-						}}
-						className="cursor-pointer w-5 absolute right-2"
-						src={search_icon}
-						alt="search"
-					/>
-				</div>
+				<Search
+					searchRef={searchRef}
+					showSearch={showSearch}
+					setShowSearch={setShowSearch}
+				/>
 
 				{/* Notifications */}
 				<div className="relative group cursor-pointer">
@@ -176,11 +189,36 @@ const Navbar = () => {
 					ref={menuRef}
 					className="absolute top-full left-0 w-full bg-black flex flex-col items-center gap-4 py-5 md:hidden"
 				>
-					<li className="cursor-pointer hover:text-gray-300">Home</li>
-					<li className="cursor-pointer hover:text-gray-300">TV Shows</li>
-					<li className="cursor-pointer hover:text-gray-300">Movies</li>
-					<li className="cursor-pointer hover:text-gray-300">New & Popular</li>
-					<li className="cursor-pointer hover:text-gray-300">My List</li>
+					<li
+						onClick={() => navigate("/home")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						Home
+					</li>
+					<li
+						onClick={() => navigate("/movies")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						Movies
+					</li>
+					<li
+						onClick={() => navigate("/new&popular")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						New & Popular
+					</li>
+					<li
+						onClick={() => navigate("/tv-shows")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						TV Shows
+					</li>
+					<li
+						onClick={() => navigate("/mylist")}
+						className="cursor-pointer hover:text-gray-300"
+					>
+						My List
+					</li>
 				</ul>
 			)}
 		</nav>

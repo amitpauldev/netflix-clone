@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import cards_data from "../../assets/cards/Cards_data";
+// import cards_data from "../../assets/cards/Cards_data";
 import { useNavigate } from "react-router";
+
+import { useAllCards } from "../../contexts/AllCardsDataProvider";
 
 const TitleCards = ({ title, category }) => {
 	const [apiData, setApiData] = useState([]);
 	const navigate = useNavigate();
+
+	const { setAllMovies } = useAllCards();
 
 	// TMDB API Fetching
 	const options = {
@@ -22,7 +26,27 @@ const TitleCards = ({ title, category }) => {
 			options,
 		)
 			.then((res) => res.json())
-			.then((res) => setApiData(res.results))
+			.then((res) => {
+				setApiData(res.results);
+				// push into global state
+				// setAllMovies((prev) => {
+				// 	const newMovies = res.results.filter(
+				// 		(movie) => !prev.some((item) => item.id === movie.id),
+				// 	);
+				// 	return [...prev, ...newMovies, category];
+				// });
+				setAllMovies((prev) => {
+					const newMovies = res.results
+						.filter((movie) => !prev.some((item) => item.id === movie.id))
+						.map((movie) => ({
+							id: movie.id,
+							original_title: movie.original_title,
+							backdrop_path: movie.backdrop_path,
+						}));
+
+					return [...prev, ...newMovies];
+				});
+			})
 			.catch((err) => console.error(err));
 	}, []);
 	// console.log(apiData);

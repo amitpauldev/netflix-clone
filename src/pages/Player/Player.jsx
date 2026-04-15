@@ -47,7 +47,7 @@ const Player = () => {
 			<div className="flex justify-center items-center mt-10">
 				<iframe
 					className="w-[90%] h-[90vh] rounded-lg"
-					src={`https://www.youtube.com/embed/${apiData.key}`}
+					src={`https://www.youtube.com/embed/${apiData.key ? apiData.key : "80dqOwAOhbo"}`}
 					title="Trailer"
 					frameBorder="0"
 					allow="autoplay; encrypted-media"
@@ -57,9 +57,9 @@ const Player = () => {
 
 			{/* Info Section */}
 			<div className="px-10 py-5 flex justify-between text-gray-300 text-sm">
-				<p>📅 Published: {apiData?.published_at?.slice(0, 10)}</p>
-				<p>🎬 Name: {apiData?.name}</p>
-				<p>🎭 Type: {apiData?.type}</p>
+				<p>Published: {apiData?.published_at?.slice(0, 10)}</p>
+				<p>Name: {apiData?.name}</p>
+				<p>Type: {apiData?.type}</p>
 			</div>
 		</div>
 	);
