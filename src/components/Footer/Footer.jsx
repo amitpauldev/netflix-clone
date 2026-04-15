@@ -66,7 +66,16 @@ const Footer = () => {
 			</button>
 
 			{/* Bottom Text */}
-			<p className="text-gray-500">Netflix Bangladesh Clone By Amit © 2026</p>
+			<p className="text-gray-500 text-sm">
+				Netflix Clone By Amit Paul © 2026 |
+				<a
+					href="https://www.themoviedb.org/"
+					target="_blank"
+					className="underline hover:text-white ml-1"
+				>
+					Powered by TMDB API
+				</a>
+			</p>
 		</footer>
 	);
 };

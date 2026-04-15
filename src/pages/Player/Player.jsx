@@ -31,7 +31,7 @@ const Player = () => {
 			.then((res) => res.json())
 			.then((res) => setApiData(res.results[0]))
 			.catch((err) => console.error(err));
-	}, []);
+	}, [id]);
 
 	return (
 		<div className="w-full h-screen bg-black text-white relative flex flex-col">
@@ -40,7 +40,7 @@ const Player = () => {
 				src={back_arrow_icon}
 				alt="Back"
 				className="absolute top-5 left-5 w-10 cursor-pointer z-20"
-				onClick={() => navigate("/")}
+				onClick={() => navigate("/home")}
 			/>
 
 			{/* Video Section */}
@@ -57,9 +57,9 @@ const Player = () => {
 
 			{/* Info Section */}
 			<div className="px-10 py-5 flex justify-between text-gray-300 text-sm">
-				<p>📅 Published: {apiData.published_at.slice(0, 10)}</p>
-				<p>🎬 Name: {apiData.name}</p>
-				<p>🎭 Type: {apiData.type}</p>
+				<p>📅 Published: {apiData?.published_at?.slice(0, 10)}</p>
+				<p>🎬 Name: {apiData?.name}</p>
+				<p>🎭 Type: {apiData?.type}</p>
 			</div>
 		</div>
 	);

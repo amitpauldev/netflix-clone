@@ -25,7 +25,7 @@ const TitleCards = ({ title, category }) => {
 			.then((res) => setApiData(res.results))
 			.catch((err) => console.error(err));
 	}, []);
-	console.log(apiData);
+	// console.log(apiData);
 	return (
 		<div className="mt-12 mb-5">
 			<h2 className="text-xl font-bold mb-2">
