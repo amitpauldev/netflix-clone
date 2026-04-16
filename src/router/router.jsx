@@ -49,7 +49,7 @@ const router = createBrowserRouter([
 				element: <TVShows />,
 			},
 			{
-				path: "/mylist",
+				path: "/my-list",
 				element: (
 					<ProtectedRouteUsers>
 						<MyLists />

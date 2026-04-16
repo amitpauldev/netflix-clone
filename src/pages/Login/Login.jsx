@@ -37,6 +37,7 @@ const Login = () => {
 		try {
 			if (signState === "Sign Up") {
 				await signUp(name, email, password);
+				navigate("/home");
 				setSignState("Sign In");
 			} else {
 				await logIn(email, password);

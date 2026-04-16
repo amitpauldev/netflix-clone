@@ -8,12 +8,12 @@ import {
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyAG95HV6BcMk-1X9DxiXpDmrjpHM5liZkI",
-	authDomain: "netfix-clone-a9fda.firebaseapp.com",
-	projectId: "netfix-clone-a9fda",
-	storageBucket: "netfix-clone-a9fda.firebasestorage.app",
-	messagingSenderId: "82322719252",
-	appId: "1:82322719252:web:d8e7f99d51c5a537b99d01",
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
