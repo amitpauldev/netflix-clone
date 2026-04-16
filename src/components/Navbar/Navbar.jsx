@@ -19,7 +19,7 @@ const Navbar = () => {
 	const searchRef = useRef();
 	const profileRef = useRef();
 
-	const { user } = useAuth();
+	const { user, loggedIn } = useAuth();
 	const navigate = useNavigate();
 
 	// Scroll effect (React way)
@@ -98,12 +98,14 @@ const Navbar = () => {
 					>
 						TV Shows
 					</li>
-					<li
-						onClick={() => navigate("/mylist")}
-						className="cursor-pointer hover:text-gray-300"
-					>
-						My List
-					</li>
+					{loggedIn && (
+						<li
+							onClick={() => navigate("/my-list")}
+							className="cursor-pointer hover:text-gray-300"
+						>
+							My List
+						</li>
+					)}
 				</ul>
 			</div>
 
@@ -190,31 +192,46 @@ const Navbar = () => {
 					className="absolute top-full left-0 w-full bg-black flex flex-col items-center gap-4 py-5 md:hidden"
 				>
 					<li
-						onClick={() => navigate("/home")}
+						onClick={() => {
+							navigate("/home");
+							setMenuOpen(!menuOpen);
+						}}
 						className="cursor-pointer hover:text-gray-300"
 					>
 						Home
 					</li>
 					<li
-						onClick={() => navigate("/movies")}
+						onClick={() => {
+							navigate("/movies");
+							setMenuOpen(!menuOpen);
+						}}
 						className="cursor-pointer hover:text-gray-300"
 					>
 						Movies
 					</li>
 					<li
-						onClick={() => navigate("/new&popular")}
+						onClick={() => {
+							navigate("/new&popular");
+							setMenuOpen(!menuOpen);
+						}}
 						className="cursor-pointer hover:text-gray-300"
 					>
 						New & Popular
 					</li>
 					<li
-						onClick={() => navigate("/tv-shows")}
+						onClick={() => {
+							navigate("/tv-shows");
+							setMenuOpen(!menuOpen);
+						}}
 						className="cursor-pointer hover:text-gray-300"
 					>
 						TV Shows
 					</li>
 					<li
-						onClick={() => navigate("/mylist")}
+						onClick={() => {
+							navigate("/mylist");
+							setMenuOpen(!menuOpen);
+						}}
 						className="cursor-pointer hover:text-gray-300"
 					>
 						My List

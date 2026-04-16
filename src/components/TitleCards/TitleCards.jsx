@@ -3,53 +3,36 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { useAllCards } from "../../contexts/AllCardsDataProvider";
+import { useGetMoviesQuery } from "../../features/api/apiSlice";
 
 const TitleCards = ({ title, category }) => {
-	const [apiData, setApiData] = useState([]);
+	const {
+		data: moviesData,
+		isLoading,
+		error,
+	} = useGetMoviesQuery({ category });
 	const navigate = useNavigate();
 
 	const { setAllMovies } = useAllCards();
 
-	// TMDB API Fetching
-	const options = {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization:
-				"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZWYzYzI5ZjcxZGE4NGU0NDVkNmJiMTkzM2Q2OThkNyIsIm5iZiI6MTc3NjA4Njk0Ni4xNjUsInN1YiI6IjY5ZGNlZmEyNTI0ZGFkZDEyZGI2NTZmZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DOgHq8LQt6gEy73KYZYml8vMr69RoWpppn3SGtKYGLI",
-		},
-	};
-
+	// filter out duplicate movies and add new movies to allMovies
 	useEffect(() => {
-		fetch(
-			`https://api.themoviedb.org/3/movie/${category ? category : "now_playing"}?language=en-US&page=1`,
-			options,
-		)
-			.then((res) => res.json())
-			.then((res) => {
-				setApiData(res.results);
-				// push into global state
-				// setAllMovies((prev) => {
-				// 	const newMovies = res.results.filter(
-				// 		(movie) => !prev.some((item) => item.id === movie.id),
-				// 	);
-				// 	return [...prev, ...newMovies, category];
-				// });
-				setAllMovies((prev) => {
-					const newMovies = res.results
-						.filter((movie) => !prev.some((item) => item.id === movie.id))
-						.map((movie) => ({
-							id: movie.id,
-							original_title: movie.original_title,
-							backdrop_path: movie.backdrop_path,
-						}));
+		if (moviesData) {
+			setAllMovies((prev) => {
+				const newMovies = moviesData?.results?.filter(
+					(movie) => !prev.some((m) => m.id === movie.id),
+				);
+				const updatedMovies = newMovies.map((movie) => ({
+					id: movie.id,
+					original_title: movie.original_title,
+					backdrop_path: movie.backdrop_path,
+				}));
+				return [...prev, ...updatedMovies];
+			});
+		}
+	}, [moviesData]);
+	// console.log(moviesData.results);
 
-					return [...prev, ...newMovies];
-				});
-			})
-			.catch((err) => console.error(err));
-	}, []);
-	// console.log(apiData);
 	return (
 		<div className="mt-12 mb-5">
 			<h2 className="text-xl font-bold mb-2">
@@ -61,22 +44,28 @@ const TitleCards = ({ title, category }) => {
 					e.currentTarget.scrollLeft += e.deltaY;
 				}}
 			>
-				{apiData.map((card, index) => (
-					<div
-						key={index}
-						className="relative flex-none cursor-pointer"
-						onClick={() => navigate(`/player/${card.id}`)}
-					>
-						<img
-							src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`} // base url + size + path
-							alt={card.original_title}
-							className="w-60 rounded"
-						/>
-						<h3 className="absolute bottom-1 right-2 mb-4 select-none">
-							{card.original_title}
-						</h3>
-					</div>
-				))}
+				{isLoading ? (
+					<h1>Loading...</h1>
+				) : error ? (
+					<h1>Something went wrong</h1>
+				) : (
+					moviesData?.results?.map((movie) => (
+						<div
+							key={movie.id}
+							className="relative flex-none cursor-pointer"
+							onClick={() => navigate(`/player/${movie.id}`)}
+						>
+							<img
+								src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} // base url + size + path
+								alt={movie.original_title}
+								className="w-60 rounded"
+							/>
+							<h3 className="absolute bottom-1 right-2 mb-4 select-none">
+								{movie.original_title}
+							</h3>
+						</div>
+					))
+				)}
 			</div>
 		</div>
 	);

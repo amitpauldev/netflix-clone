@@ -4,7 +4,7 @@ import MovieCardLists from "../Movies/MovieCardLists";
 
 const Home = () => {
 	const { allMovies } = useAllCards();
-	console.log(allMovies);
+	// console.log(allMovies);
 	return (
 		<div>
 			<Hero />

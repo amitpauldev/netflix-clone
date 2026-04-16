@@ -50,7 +50,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/mylist",
-				element: <MyLists />,
+				element: (
+					<ProtectedRouteUsers>
+						<MyLists />
+					</ProtectedRouteUsers>
+				),
 			},
 		],
 	},

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import search_icon from "../../assets/search_icon.svg";
 import { useAllCards } from "../../contexts/AllCardsDataProvider";
 import { useNavigate } from "react-router";
@@ -9,6 +9,8 @@ const Search = ({ searchRef, showSearch, setShowSearch }) => {
 
 	const navigate = useNavigate();
 
+	const inputRef = useRef();
+
 	const filteredMovies = allMovies.filter((m) =>
 		m.original_title.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
@@ -16,6 +18,7 @@ const Search = ({ searchRef, showSearch, setShowSearch }) => {
 	return (
 		<div ref={searchRef} className="flex items-center relative">
 			<input
+				ref={inputRef}
 				type="text"
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}
@@ -28,6 +31,7 @@ const Search = ({ searchRef, showSearch, setShowSearch }) => {
 				onClick={(e) => {
 					e.stopPropagation();
 					setShowSearch((prev) => !prev);
+					inputRef.current.focus();
 				}}
 				className="cursor-pointer w-5 absolute right-2"
 				src={search_icon}
