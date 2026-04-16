@@ -1,4 +1,4 @@
-import hero_banner from "../../assets/hero_banner(1).jpg";
+import hero_banner from "../../assets/hero_banner_2.jpg";
 import hero_title from "../../assets/hero_title.png";
 import play_icon from "../../assets/play_icon.png";
 import info_icon from "../../assets/info_icon.png";

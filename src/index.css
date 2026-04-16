@@ -30,6 +30,6 @@
 	}
 	.bg-banner {
 		/* background-image: url("./assets/background_banner.jpg") */
-		@apply w-full h-screen bg-[url('./assets/background_banner(2).jpg')] bg-cover bg-center;
+		@apply w-full h-screen bg-[url('./assets/background_banner_2.jpg')] bg-cover bg-center;
 	}
 }
