@@ -10,7 +10,7 @@ const Hero = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="relative w-full h-screen">
+		<div className="relative w-full h-[300px] md:h-[600px] lg:h-[700px] 2xl:h-[750px]">
 			<img
 				src={hero_banner}
 				alt="Hero Banner"
@@ -44,7 +44,9 @@ const Hero = () => {
 					</button>
 				</div>
 
-				<TitleCards />
+				<div className="hidden md:block">
+					<TitleCards />
+				</div>
 			</div>
 		</div>
 	);

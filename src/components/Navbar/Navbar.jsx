@@ -65,12 +65,30 @@ const Navbar = () => {
 		>
 			{/* LEFT */}
 			<div className="flex items-center gap-6">
-				<img
-					onClick={() => navigate("/home")}
-					className="w-24 cursor-pointer"
-					src={logo}
-					alt="logo"
-				/>
+				{/* Logo  */}
+				<>
+					{/* Small screens (below md) */}
+					<div className="sm:hidden">
+						{showSearch || (
+							<img
+								onClick={() => navigate("/home")}
+								className="w-24 cursor-pointer"
+								src={logo}
+								alt="logo"
+							/>
+						)}
+					</div>
+
+					{/* Medium and above (md+) */}
+					<div className="hidden sm:block">
+						<img
+							onClick={() => navigate("/home")}
+							className="w-24 cursor-pointer"
+							src={logo}
+							alt="logo"
+						/>
+					</div>
+				</>
 
 				{/* Desktop Menu */}
 				<ul className="hidden md:flex gap-5 text-sm">
@@ -119,18 +137,21 @@ const Navbar = () => {
 				/>
 
 				{/* Notifications */}
-				<div className="relative group cursor-pointer">
-					<img className="w-5" src={bell_icon} alt="bell" />
+				{loggedIn &&
+					(showSearch || (
+						<div className="relative group cursor-pointer">
+							<img className="w-5" src={bell_icon} alt="bell" />
 
-					<div className="absolute right-0 top-full mt-2 w-60 bg-black rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300">
-						<p className="px-4 py-2 text-sm border-b border-gray-700">
-							Notifications
-						</p>
-						<p className="px-4 py-2 text-sm text-gray-400">
-							No new notifications
-						</p>
-					</div>
-				</div>
+							<div className="absolute right-0 top-full mt-2 w-60 bg-black rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300">
+								<p className="px-4 py-2 text-sm border-b border-gray-700">
+									Notifications
+								</p>
+								<p className="px-4 py-2 text-sm text-gray-400">
+									No new notifications
+								</p>
+							</div>
+						</div>
+					))}
 
 				{/* Profile */}
 				{user ? (
@@ -174,6 +195,7 @@ const Navbar = () => {
 				)}
 
 				{/* Mobile Menu Button */}
+
 				<div
 					className="md:hidden cursor-pointer text-xl"
 					onClick={(e) => {
