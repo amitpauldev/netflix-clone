@@ -6,7 +6,7 @@ A fully responsive Netflix-inspired web application built with modern front-end 
 
 ## 🚀 Live Demo
 
-🔗 [Visit Live Site](https://netflix-clone-by-amit.vercel.app/)
+🔗 [Visit Live Site](https://netflix-amit.vercel.app/)
 _(click to explore live)_
 
 ---
